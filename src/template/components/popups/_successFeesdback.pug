@@ -1,0 +1,8 @@
+mixin successFeedback()
+    div.success-popup(data-animate="true").popup.success-popup-feedback
+        div.popup-inner
+            div.popup-wrapper(data-animation-name="sUp")
+                button.popup-close.js-close-popup
+                    +svg('cross')
+                h5 Мы свяжемся с Вами в ближайшее время
+    button.hideTriggerFeedback.js-open-p(data-open="success-popup-feedback")

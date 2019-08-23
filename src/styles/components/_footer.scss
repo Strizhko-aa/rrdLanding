@@ -1,0 +1,238 @@
+.footer {
+	position: relative;
+	background: transparent;
+	min-height: 180px;
+	margin-top: 60px;
+
+	@include tablet {
+		min-height: 50px;
+		padding-bottom: 40px;
+	}
+
+	@include mobile {
+		padding-bottom: 23px;
+	}
+
+	.container {
+		border-top: 1px solid rgba(255, 255, 255, 0.6);
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		padding-top: 35px;
+
+		@include mobile {
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+
+	&-logo {
+		width: 200px;
+
+		@include tablet {
+			margin-left: 10px;
+		}
+
+		@include mobile {
+			margin: 0;
+		}
+
+
+		svg {
+			display: block;
+			width: 100px;
+			height: 43px;
+			margin-bottom: 30px;
+			fill: $white;
+
+			@include mobile {
+				width: 86px;
+				height: 37px;
+				margin: 0px auto 23px;
+			}
+		}
+
+		p {
+			@include mobile {
+				display: none;
+			}
+		}
+
+	}
+
+	p {
+		font-family: $font-med;
+		font-size: 14px;
+		line-height: 17px;
+		letter-spacing: 0.11em;
+		color: $white;
+		text-transform: uppercase;
+	}
+
+	p.copyright {
+		display: none;
+		font-size: 10px;
+		line-height: 12px;
+		margin-top: 23px;
+
+		@include mobile {
+			display: block;
+		}
+	}
+
+	&-menu {
+		width: 475px;
+
+		@include tabletMedium {
+			display: none;
+		}
+
+		ul {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			padding-top: 18px;
+		}
+
+		li {
+			font-family: $font-reg;
+			font-size: 16px;
+			line-height: 24px;
+			color: $white;
+			transition: all 0.35s ease-out;
+			margin-right: 30px;
+			cursor: pointer;
+
+			&:hover {
+				color: $accent;
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+
+	&-info {
+		width: 205px;
+		padding-top: 9px;
+
+		svg {
+			display: inline-block;
+			vertical-align: middle;
+			fill: $white;
+			transition: all 0.35s ease-out;
+		}
+
+		span {
+			display: inline-block;
+			vertical-align: middle;
+			color: $white;
+			font-family: $font-reg;
+			transition: all 0.35s ease-out;
+		}
+
+		a {
+			display: block;
+		}
+
+		a:hover span {
+			color: $accent;
+		}
+
+		a:hover svg {
+			fill: $accent;
+		}
+
+		a:first-child {
+			margin-bottom: 15px;
+
+			span {
+				font-size: 18px;
+				line-height: 22px;
+
+				@include mobile {
+					font-size: 16px;
+					line-height: 20px;
+				}
+			}
+
+			svg {
+				width: 19px;
+				height: 19px;
+				margin-right: 9px;
+
+				@include mobile {
+					width: 16px;
+					height: 16px;
+					margin-right: 7px;
+				}
+			}
+		}
+
+		a:last-child {
+			@include mobile {
+				padding-left: 20px;
+			}
+
+			span {
+				font-size: 20px;
+				line-height: 24px;
+
+				@include mobile {
+					font-size: 16px;
+					line-height: 20px;
+				}
+			}
+
+			svg {
+				width: 22px;
+				height: 22px;
+				margin-right: 12px;
+
+				@include mobile {
+					width: 16px;
+					height: 13px;
+					margin-right: 8px;
+				}
+			}
+		}
+	}
+
+
+
+
+	&-bg {
+		width: 100%;
+		min-height: 1235px;
+		background: url('../img/contacts-bg.svg') no-repeat;
+		background-size: cover;
+		position: absolute;
+		left: 0;
+		bottom: 0px;
+		z-index: -1;
+
+		@media (min-width: 1921px) {
+			min-height: calc(1235px - 280px);
+			background: linear-gradient(155.29deg, #27AE60 -21.76%, #0477BD 74.37%), linear-gradient(152.5deg, #2156DF 17.61%, #0477BD 79.53%), #0477BD;
+		}
+
+		@media (max-width: 1300px) and (min-width: 992px) {
+			min-height: 1335px;
+		}
+
+		@include tabletMedium {
+			min-height: 1220px;
+			background: linear-gradient(155.29deg, #27AE60 -21.76%, #0477BD 74.37%), linear-gradient(152.5deg, #2156DF 17.61%, #0477BD 79.53%), #0477BD;
+		}
+
+		@include tablet {
+			min-height: 1120px;
+		}
+
+		@include mobile {
+			min-height: 990px;
+		}
+	}
+}

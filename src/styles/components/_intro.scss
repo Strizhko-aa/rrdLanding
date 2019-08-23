@@ -1,0 +1,145 @@
+.intro {
+	padding-top: 120px;
+	min-height: 730px;
+	width: 100%;
+	position: relative;
+
+	@media (min-width: 1921px) {
+		background: linear-gradient(155.29deg, #27AE60 -21.76%, #0477BD 74.37%), linear-gradient(152.5deg, #2156DF 17.61%, #0477BD 79.53%), #0477BD;
+	}
+
+	@media (max-width: 991px) and (min-width: 320px) {
+		background: linear-gradient(149.93deg, #27AE60 -13.97%, #0477BD 64.01%);
+	}
+
+	@include tabletMedium {
+		min-height: 500px;
+	}
+
+	.container {
+		position: relative;
+	}
+
+	&-bg {
+		display: none;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 1549px;
+		height: 730px;
+		z-index: -1;
+
+		@media (max-width: 1920px) and (min-width: 1600px) {
+			width: 2030px;
+			top: -150px;
+			display: block;
+		}
+
+		@media (max-width: 1599px) and (min-width: 1450px) {
+			width: 1610px;
+			top: -15px;
+			display: block;
+		}
+
+		@media (max-width: 1449px) and (min-width: 992px) {
+			display: block;
+			width: 1560px;
+			top: 0px;
+			left: -90px;
+		}
+	}
+
+
+	&-text {
+		max-width: 540px;
+		width: 100%;
+		padding-top: 120px;
+		color: $white;
+		position: relative;
+		z-index: 5;
+
+		@include tabletMedium {
+			max-width: 730px;
+			margin: 0px auto 40px;
+			padding-top: 60px;
+		}
+
+		h1 {
+			font-family: $font-med;
+			font-size: 1.5rem;
+			line-height: 2.25rem;
+			letter-spacing: 0.05em;
+			margin-bottom: 1.9rem;
+
+			@include tabletMedium {
+				text-align: center;
+			}
+		}
+
+		a {
+			display: block;
+			width: 250px;
+			height: 60px;
+			background: $accent;
+			border-radius: 20px;
+			font-family: $font-reg;
+			font-size: 0.83rem;
+			line-height: 60px;
+			text-align: center;
+			letter-spacing: 0.05em;
+			color: $white;
+			transition: all 0.35s ease-out;
+
+			@include tabletMedium {
+				margin: 0px auto;
+			}
+
+			@include tablet {
+				font-size: 20px;
+			}
+
+			&:hover {
+				background: $hovered;
+			}
+		}
+	}
+
+	&-image {
+		position: absolute;
+		width: 736px;
+		z-index: 1;
+		left: 53%;
+		bottom: -240px;
+		transform: translate(-50%, 0%);
+
+		@media (min-width: 1921px) {
+			left: 65%;
+			bottom: -205px;
+		}
+
+		@media (max-width: 1920px) and (min-width: 1600px) {
+			left: 59%;
+		}
+
+		@media (max-width: 1449px) and (min-width: 992px) {
+			left: 65%;
+			bottom: -175px;
+		}
+
+		@include tabletMedium {
+			position: relative;
+			max-width: 736px;
+			width: 100%;
+			margin: 0px auto;
+			left: 0;
+			bottom: 0;
+			transform: translate(0%, 0%);
+		}
+
+		img {
+			display: block;
+			max-width: 100%;
+			height: auto;
+		}
+	}
+}

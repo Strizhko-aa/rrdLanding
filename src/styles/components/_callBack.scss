@@ -1,0 +1,152 @@
+.callBack {
+	position: relative;
+	z-index: 20;
+	overflow: hidden;
+	background: #e6f1f9;
+	padding-top: 90px;
+	padding-bottom: 92px;
+
+	@include tablet {
+		padding-top: 44px;
+		padding-bottom: 71px;
+	}
+
+	h2 {
+		margin-bottom: 22px;
+
+		@include tablet {
+			font-size: 28px;
+			line-height: 32px;
+		}
+	}
+
+	p {
+		font-family: $font-med;
+		font-size: 26px;
+		line-height: 39px;
+		color: $dark;
+		margin-bottom: 60px;
+		text-align: center;
+
+		@include tablet {
+			margin-bottom: 40px;
+			font-size: 22px;
+			line-height: 24px;
+		}
+	}
+
+	&-form {
+		max-width: 740px;
+		width: 100%;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		margin: 0px auto;
+
+		@include tablet {
+			flex-direction: column;
+		}
+	}
+
+	&-field {
+		width: calc(100%/2 - 22px);
+		height: 60px;
+		position: relative;
+		margin-right: 45px;
+
+		@include tablet {
+			max-width: 310px;
+			width: 100%;
+			margin: 0px auto 35px;
+		}
+
+		&:last-child {
+			margin: 0px auto 0px;
+		}
+
+		&.is-focused label {
+			transform: translate(-20px, -60px);
+			color: $accent;
+		}
+
+		.validate-message {
+			bottom: -20px;
+		}
+
+		input {
+			display: block;
+			width: 100%;
+			height: 100%;
+			border: 2px solid #7BBE4D;
+			background: transparent;
+			border-radius: 20px;
+			font-family: $font-reg;
+			font-size: 0.65rem;
+			color: $dark;
+			padding-left: 25px;
+			padding-right: 15px;
+			outline: none;
+			box-shadow: none;
+
+			@include tablet {
+				font-size: 1rem;
+			}
+		}
+
+		label {
+			font-family: $font-reg;
+			font-size: 0.5rem;
+			color: $dark;
+			color: rgba(33, 33, 33, 0.6);
+			letter-spacing: 0.03em;
+			position: absolute;
+			left: 25px;
+			top: 50%;
+			transform: translate(0%, -50%);
+			transition: all 0.45s;
+			z-index: 5;
+
+			@include tablet {
+				font-size: 0.75rem;
+			}
+		}
+
+		button {
+			display: block;
+			width: 100%;
+			height: 100%;
+			border-radius: 20px;
+			padding: 0;
+			background: $accent;
+			font-family: $font-med;
+			color: $white;
+			font-size: 0.66rem;
+			letter-spacing: 0.03em;
+			outline: none;
+			text-align: center;
+			transition: all 0.35s ease-out;
+
+			@include tablet {
+				font-size: 0.9rem;
+			}
+		}
+
+		.validate-message {
+			position: absolute;
+			left: 5px;
+			bottom: -27px;
+			background-color: transparent;
+			font-family: $font-reg;
+			font-size: 0.5rem;
+			line-height: 1rem;
+			text-align: left;
+			color: $error;
+			z-index: 10;
+
+			@include tablet {
+				font-size: 0.75rem;
+				bottom: -24px;
+			}
+		}
+	}
+}

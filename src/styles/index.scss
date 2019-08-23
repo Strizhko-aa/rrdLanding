@@ -1,0 +1,19 @@
+/* LIBS */
+@import 'libs/reset-normalize';
+
+/* PARTIALS */
+@import 'partials/mixins';
+@import 'partials/variables';
+@import 'partials/fonts';
+@import 'partials/common';
+@import 'partials/helpers';
+@import 'partials/keyframes';
+
+
+/* COMPONENTS */
+@import 'components/header';
+@import 'components/footer';
+@import 'components/popup';
+
+/* PAGES */
+@import 'pages/home';

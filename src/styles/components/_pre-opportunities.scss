@@ -1,0 +1,214 @@
+.pre-opportunities {
+	min-height: 720px;
+	position: relative;
+	position: relative;
+
+
+	@media (min-width: 1921px) {
+		min-height: 600px;
+		background: linear-gradient(155.29deg, #27AE60 -21.76%, #0477BD 74.37%), linear-gradient(152.5deg, #2156DF 17.61%, #0477BD 79.53%), #0477BD;
+	}
+
+	@media (max-width: 1920px) and (min-width: 1600px) {
+		background: url('../img/test.svg') 100% 70% no-repeat;
+		background-size: 100% 150%;
+		min-height: 770px;
+	}
+
+	@media (max-width: 991px) and (min-width: 320px) {
+		background: linear-gradient(149.93deg, #27AE60 -13.97%, #0477BD 64.01%);
+	}
+
+	@include tabletMedium {
+		min-height: 500px;
+		margin-top: 40px;
+		padding: 60px 0px 50px;
+	}
+
+	&-bg {
+		width: 100%;
+		min-height: 795px;
+		display: none;
+		position: absolute;
+		left: 0;
+		bottom: -50px;
+		background: url('../img/test.svg') 100% 86% no-repeat;
+		background-size: 110% 150%;
+		z-index: -1;
+
+		@media (max-width: 1599px) and (min-width: 1440px) {
+			display: block;
+			background-size: cover;
+			min-height: 990px;
+		}
+
+		@media (max-width: 1439px) and (min-width: 992px) {
+			display: block;
+			background-size: cover;
+			min-height: 948px;
+			background-position: 100% 109%;
+			bottom: -10px;
+		}
+
+		@include tabletMedium {
+			display: none;
+		}
+	}
+
+	.container {
+		display: flex;
+		justify-content: flex-start;
+		align-items: stretch;
+		position: relative;
+
+		@include tabletMedium {
+			justify-content: center;
+			align-items: center;
+			flex-direction: column-reverse;
+		}
+	}
+
+	&-image {
+		width: calc(100% - 590px - 25px);
+		height: 420px;
+		position: relative;
+
+		@media (max-width: 1439px) and (min-width: 992px) {
+			width: calc(100% - 490px);
+		}
+
+		@include tabletMedium {
+			width: 100%;
+			max-width: 690px;
+			margin: 0px auto;
+			height: auto;
+		}
+
+		img {
+			display: block;
+			width: 650px;
+			height: 420px;
+			position: absolute;
+			left: -10%;
+			top: 85px;
+			transform: translate(-30%, 0%);
+
+			@media (max-width: 1920px) and (min-width: 1600px) {
+				top: 185px;
+			}
+
+			@media (max-width: 1599px) and (min-width: 1440px) {
+				top: 105px;
+			}
+
+			@media (max-width: 1439px) and (min-width: 1160px) {
+				left: 0;
+				top: 115px;
+				transform: translate(-10%, 0%);
+			}
+
+			@media (max-width: 1159px) and (min-width: 992px) {
+				width: 500px;
+				height: auto;
+				top: 240px;
+				left: 0;
+				transform: translate(-10%, 0%);
+			}
+
+			@include tabletMedium {
+				position: relative;
+				left: 0;
+				top: 0;
+				transform: translate(0%, 0%);
+				max-width: 100%;
+				width: 100%;
+				height: auto;
+				margin: 0px auto;
+			}
+		}
+	}
+
+	&-list {
+		max-width: 590px;
+		width: 100%;
+		padding-top: 115px;
+		position: relative;
+
+		@media (max-width: 1920px) and (min-width: 1600px) {
+			padding-top: 315px;
+			right: -160px;
+		}
+
+		@media (max-width: 1599px) and (min-width: 1440px) {
+			padding-top: 235px;
+			position: relative;
+			right: -60px;
+		}
+
+		@media (max-width: 1439px) and (min-width: 992px) {
+			padding-top: 245px;
+			max-width: 490px;
+			right: -30px;
+		}
+
+		@include tabletMedium {
+			max-width: 590px;
+			padding-top: 0;
+		}
+
+		li {
+			font-family: $font-reg;
+			font-size: 18px;
+			line-height: 29px;
+			color: $white;
+			position: relative;
+			padding-left: 20px;
+			margin-bottom: 27px;
+
+			&:last-child {
+				margin-bottom: 56px;
+			}
+
+			&:before {
+				content: '';
+				display: block;
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+				background-color: #F84C1B;
+				position: absolute;
+				left: 0;
+				top: 10px;
+			}
+		}
+
+		a {
+			display: block;
+			width: 324px;
+			height: 60px;
+			font-size: 20px;
+			color: $white;
+			line-height: 60px;
+			text-align: center;
+			background: #27AE60;
+			border-radius: 20px;
+			transition: all 0.35s ease-out;
+
+			&:hover {
+				background: $hovered;
+			}
+
+			@include tabletMedium {
+				margin: 0px auto 50px;
+			}
+
+			@include tablet {
+				max-width: 324px;
+				width: 100%;
+				font-size: 18px;
+			}
+		}
+
+
+	}
+}

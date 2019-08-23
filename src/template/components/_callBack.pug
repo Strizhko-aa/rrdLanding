@@ -1,0 +1,12 @@
+mixin callBack()
+    section.callBack.js-section#callBack
+        .container
+            h2 У вас остались вопросы?
+            p Xотите перезвоним Вам в течении 5 мин?
+            form#callBackForm.callBack-form.js-forms(novalidate)
+                .callBack-field
+                    label(for="callPhone") Телефон
+                    input(id="callPhone" type="tel" class="js-validate js-input" name="phone" autocomplete="off")
+                    span.validate-message
+                .callBack-field
+                    button(type="submit") Жду звонка!

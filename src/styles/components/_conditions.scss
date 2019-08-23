@@ -1,0 +1,150 @@
+.conditions {
+	min-height: 528px;
+	padding-top: 150px;
+	position: relative;
+	padding-bottom: 150px;
+
+	@include tabletMedium {
+		padding-top: 30px;
+	}
+
+	@include tablet {
+		padding-top: 50px;
+	}
+
+	h2 {
+		margin-bottom: 41px;
+
+		@include tablet {
+			margin-bottom: 36px;
+		}
+	}
+
+	&-wrap {
+		display: flex;
+		justify-content: flex-start;
+		align-items: flex-start;
+		flex-wrap: wrap;
+
+		@include desktopUltra {
+			flex-direction: column-reverse;
+		}
+	}
+
+	&-tabs {
+		width: 690px;
+		margin-left: 20px;
+		padding-top: 33px;
+
+		@include desktopUltra {
+			width: 100%;
+			margin: 0px auto 50px;
+			padding-top: 0;
+		}
+
+	}
+
+	&-item {
+
+		&-title {
+			font-family: $font-bold;
+			font-size: 24px;
+			line-height: 30px;
+			color: $dark;
+			padding: 35px 0px;
+			border-top: 1px solid rgba(4, 119, 189, 0.6);
+			transition: all 0.35s ease-out;
+			position: relative;
+			cursor: pointer;
+
+			@include tablet {
+				font-size: 18px;
+				line-height: 22px;
+				padding: 21px 0px;
+			}
+
+			svg {
+				display: block;
+				width: 22px;
+				height: 22px;
+				fill: rgba(33, 33, 33, 0.6);
+				position: absolute;
+				right: 0;
+				top: 50%;
+				transform: translate(0%, -50%);
+				transition: all 0.35s ease-out;
+
+				@include tablet {
+					width: 16px;
+					height: 16px;
+				}
+			}
+
+			&.is-open {
+				color: $blue;
+
+				svg {
+					fill: $blue;
+					transform: translate(0%, -50%) rotate(90deg);
+				}
+
+			}
+		}
+
+		&:last-child {
+			border-bottom: 1px solid rgba(4, 119, 189, 0.6);
+		}
+
+		&-text {
+			max-height: 0;
+			overflow-y: hidden;
+			transition: max-height 0.4s ease-in-out;
+
+			&.slide-down {
+				max-height: 20em;
+			}
+
+			p {
+				padding-bottom: 35px;
+				font-family: $font-reg;
+				font-size: 18px;
+				line-height: 28px;
+				color: rgba(33, 33, 33, 0.8);
+				text-align: left;
+
+				@include tablet {
+					padding-bottom: 21px;
+					font-size: 14px;
+					line-height: 20px;
+				}
+			}
+
+		}
+	}
+
+	&-image {
+		width: calc(100% - 710px);
+		transform: translateX(-20px);
+
+		@include desktopUltra {
+			width: 100%;
+			max-width: 508px;
+			margin: 0px auto;
+			transform: translateX(0px);
+		}
+
+		@include mobile {
+			max-width: 258px;
+		}
+
+		img {
+			display: block;
+			max-width: 100%;
+			height: auto;
+		}
+	}
+
+	// .js-leave {
+	// 	top: 120%;
+	// }
+}

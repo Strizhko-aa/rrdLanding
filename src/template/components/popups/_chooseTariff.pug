@@ -1,0 +1,8 @@
+mixin chooseTariff()
+    div.success-popup(data-animate="true").popup.choose-tariff
+        div.popup-inner
+            div.popup-wrapper(data-animation-name="sUp")
+                button.popup-close.js-close-popup
+                    +svg('cross')
+                h5 Для выбора тарифа перейдите в личный кабинет
+    button.hideTriggerFeedback.js-open-p(data-open="choose-tariff")

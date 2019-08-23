@@ -1,0 +1,7 @@
+@import "./font-face";
+
+// @include font-face('name', 'path', 'font-weight', 'font-style', 'font-display');
+@include font-face('Rubik-Regular', '../fonts/Rubik/Regular/Rubik-Regular', 'normal', 'normal', 'swap');
+@include font-face('Rubik-Medium', '../fonts/Rubik/Medium/Rubik-Medium', 'bolder', 'normal', 'swap');
+@include font-face('Rubik-Bold', '../fonts/Rubik/Bold/Rubik-Bold', 'bold', 'normal', 'swap');
+@include font-face('Rubik-Black', '../fonts/Rubik/Black/Rubik-Black', 'bold', 'normal', 'swap');

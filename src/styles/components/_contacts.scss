@@ -1,0 +1,222 @@
+.contacts {
+	position: relative;
+	min-height: calc(700px - 155px);
+	background: transparent;
+	padding-top: 120px;
+
+	h2 {
+		max-width: 500px;
+		width: 100%;
+		text-align: left;
+		transform: translateY(20px);
+
+		@media (min-width: 1921px) {
+			color: $white;
+			margin-left: 60px;
+			transform: translateY(0px);
+		}
+
+
+		@include tabletMedium {
+			max-width: 100%;
+			text-align: center;
+			transform: translateY(0px);
+			margin-bottom: 35px;
+			color: $white;
+		}
+	}
+
+	.container {
+		display: flex;
+		justify-content: flex-start;
+		align-items: flex-start;
+		flex-wrap: wrap;
+
+		@include tabletMedium {
+			flex-direction: column;
+		}
+	}
+
+	&-form {
+		width: calc(100% - 455px - 55px);
+		margin-right: 55px;
+
+
+
+		@include tabletMedium {
+			width: 100%;
+			margin: 0px auto 30px;
+		}
+
+		@include tabletMedium {
+			margin: 0px auto 10px;
+		}
+
+
+		form {
+			padding-top: 150px;
+			padding-left: 53px;
+			transform: translateY(30px);
+
+			@media (min-width: 1921px) {
+				padding-top: 80px;
+			}
+
+			@include tabletMedium {
+				max-width: 600px;
+				width: 100%;
+				margin: 0px auto;
+				padding-top: 0px;
+				padding-left: 0;
+				transform: translateY(0px);
+			}
+		}
+	}
+
+	&-field {
+		position: relative;
+		margin-bottom: 40px;
+
+		@include tablet {
+			margin-bottom: 30px;
+		}
+
+		&.is-focused label {
+			transform: translate(20px, 0px);
+			opacity: 0;
+		}
+
+		input {
+			display: block;
+			width: 100%;
+			height: 54px;
+			border: 1px solid rgba(255, 255, 255, 0.6);
+			background: transparent;
+			border-radius: 15px;
+			font-family: $font-reg;
+			font-size: 0.65rem;
+			color: rgba(255, 255, 255, 0.6);
+			padding-left: 25px;
+			padding-right: 15px;
+			outline: none;
+			box-shadow: none;
+
+			@include tablet {
+				font-size: 1rem;
+			}
+		}
+
+		textarea {
+			resize: none;
+			display: block;
+			width: 100%;
+			height: 113px;
+			border: 1px solid rgba(255, 255, 255, 0.6);
+			background: transparent;
+			border-radius: 15px;
+			font-family: $font-reg;
+			font-size: 0.65rem;
+			color: rgba(255, 255, 255, 0.6);
+			padding-left: 25px;
+			padding-right: 15px;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			outline: none;
+			box-shadow: none;
+
+			@include tablet {
+				font-size: 1rem;
+			}
+		}
+
+		label {
+			font-family: $font-reg;
+			font-size: 18px;
+			color: rgba(255, 255, 255, 0.6);
+			letter-spacing: 0.03em;
+			position: absolute;
+			left: 23px;
+			top: 15px;
+			transform: translate(0%, 0%);
+			transition: all 0.45s;
+			z-index: 5;
+
+			@include tablet {
+				font-size: 0.75rem;
+			}
+		}
+
+		button {
+			width: 230px;
+			height: 54px;
+			display: block;
+			background: $blue;
+			border-radius: 15px;
+			margin: 0 auto;
+			font-family: $font-med;
+			font-size: 20px;
+			color: $white;
+			transition: all 0.35s ease-out;
+			box-shadow: none;
+			outline: none;
+
+			&:hover {
+				background: $accent;
+			}
+
+			@include tablet {
+				width: 203px;
+				height: 46px;
+				font-size: 18px;
+			}
+		}
+
+		input.valid+.validate-message {
+			opacity: 0;
+		}
+
+		.validate-message {
+			position: absolute;
+			left: 5px;
+			bottom: -27px;
+			background-color: transparent;
+			font-family: $font-reg;
+			font-size: 0.5rem;
+			line-height: 1rem;
+			text-align: left;
+			color: $error;
+			z-index: 10;
+
+			@include tablet {
+				font-size: 0.75rem;
+				bottom: -24px;
+			}
+		}
+	}
+
+	&-image {
+		width: 455px;
+		margin-top: 180px;
+
+		@include tabletMedium {
+			max-width: 455px;
+			width: 100%;
+			margin: 0px auto;
+		}
+
+		@include mobile {
+			max-width: 230px;
+		}
+
+		img {
+			display: block;
+			max-width: 100%;
+			height: auto;
+		}
+	}
+
+
+	&-bg {
+		display: none;
+	}
+}

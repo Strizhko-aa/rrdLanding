@@ -1,0 +1,115 @@
+:root {
+	font-size: 24px;
+
+	@include tablet {
+		font-size: 18px;
+	}
+}
+
+body {
+	line-height: 1.4;
+	font-family: $font-reg;
+	font-weight: 400;
+	color: $dark;
+	min-height: 100vh;
+	background: $white;
+	padding-top: 40px;
+
+	@include tabletMedium {
+		padding-top: 0px;
+	}
+}
+
+button,
+a {
+	cursor: pointer;
+}
+
+.overlay {
+	display: none;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 100;
+	background-color: rgba(0, 0, 0, 0.596);
+}
+
+.stop-scrolling {
+	overflow: hidden;
+	height: 100vh;
+	width: 100vw;
+}
+
+.container {
+	width: 100%;
+	max-width: 1200px;
+	padding: 0 30px;
+	margin: 0 auto;
+
+	@include tablet {
+		padding: 0 15px;
+	}
+}
+
+.hidden {
+	display: none;
+}
+
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5 h6,
+a,
+span,
+div,
+li {
+	&::selection {
+		color: $white;
+		background-color: $hovered;
+	}
+
+}
+
+main {
+	display: block;
+	overflow: hidden;
+	min-height: calc(100vh - 100px);
+	margin-top: -140px;
+
+	@include tabletMedium {
+		margin-top: -85px;
+	}
+}
+
+.fixed+.main-page {
+	padding-top: 80px;
+}
+
+h2 {
+	font-family: $font-med;
+	font-size: 1.5rem;
+	line-height: 2.25rem;
+	letter-spacing: 0.05em;
+	color: $dark;
+	text-align: center;
+
+	@include tablet {
+		font-size: 22px;
+		line-height: 26px;
+	}
+}
+
+.js-leave {
+	display: block;
+	// width: 1px;
+	// height: 1px;
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translate(0%, -50%);
+}

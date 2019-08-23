@@ -1,0 +1,26 @@
+mixin registration()
+    div.registration-popup.popup(data-animate="true")
+        div.popup-inner
+            div.popup-wrapper(data-animation-name="sUp")
+                button.popup-close.js-close-popup
+                    +svg('cross')
+                h5 Регистрация
+                form#registration-form.popup-form.js-forms(novalidate)
+                    div.popup-form-field.input-field
+                        label(for="registration-email") Email
+                        input(id="registration-email" type="email" value="" class="js-validate js-input" name="email" autocomplete="off")
+                        span.validate-message
+                    div.popup-form-field.input-field
+                        label(for="registration-password") Пароль
+                        input(id="registration-password" type="password" value="" class="js-validate js-input" name="password" autocomplete="off")
+                        span.validate-message
+                    div.popup-form-field.input-field
+                        label(for="password-repeat") Повторите пароль
+                        input(id="password-repeat" type="password" value="" class="js-validate js-input" name="password-repeat" autocomplete="off")
+                        span.validate-message
+                    div.popup-form-field.checkbox-field
+                        input(id="privacy" type="checkbox" value="" class="js-validate js-input" name="privacy" hidden)
+                        label(for="privacy") Я принимаю условия <a href="https://rrdoc.ru/terms-of-use" target="_blank">пользовательского соглашения</a>
+                        span.validate-message
+                    div.popup-form-field
+                        button(type="submit") Зарегистрироваться

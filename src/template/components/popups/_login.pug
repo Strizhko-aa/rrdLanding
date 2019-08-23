@@ -1,0 +1,18 @@
+mixin login()
+    div.login-popup.popup(data-animate="true")
+        div.popup-inner
+            div.popup-wrapper(data-animation-name="sUp")
+                button.popup-close.js-close-popup
+                    +svg('cross')
+                h5 Вход
+                form#login-form.popup-form.js-forms(novalidate)
+                    div.popup-form-field.input-field
+                        label(for="login-email") Email
+                        input(id="login-email" type="email" class="js-validate js-input" name="email" autocomplete="off")
+                        span.validate-message
+                    div.popup-form-field.input-field
+                        label(for="login-password") Пароль
+                        input(id="login-password" type="password" class="js-validate js-input" name="passwordLogin" autocomplete="off")
+                        span.validate-message
+                    div.popup-form-field
+                        button(type="submit") Войти

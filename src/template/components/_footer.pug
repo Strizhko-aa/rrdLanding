@@ -1,0 +1,22 @@
+mixin footer()
+    footer.footer
+        .container 
+            .footer-logo
+                +svg('logo')
+                p ООО &laquo;АЙТИ-ТЕМАТИК&raquo;
+            .footer-menu
+                ul 
+                    li.js-links(data-to="goals") Цели
+                    li.js-links(data-to="opportunities") Возможности
+                    li.js-links(data-to="prices") Цены
+                    li.js-links(data-to="conditions") Условия
+                    li.js-links(data-to="contacts") Контакты
+            .footer-info
+                a(href="tel:+74732522638") 
+                    +svg('phone')
+                    span +7 (473) 252-26-38
+                a(href="mailto:inbox@rrdoc.ru") 
+                    +svg('email')
+                    span inbox@rrdoc.ru
+            p.copyright ООО &laquo;АЙТИ-ТЕМАТИК&raquo;
+        .footer-bg 

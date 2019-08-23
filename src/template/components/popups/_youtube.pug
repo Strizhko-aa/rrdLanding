@@ -1,0 +1,8 @@
+mixin youtube()
+    div.success-popup(data-animate="true").popup.youtube
+        div.popup-inner
+            div.popup-wrapper.youtube-wrapper(data-animation-name="sUp")
+                button.popup-close.js-close-popup.popup-close-youtube
+                    +svg('cross')
+                <iframe width="100%" height="445" src="https://www.youtube.com/embed/hjAJUt6wtzU" frameborder="0" style="border-radius: 5px" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    button.hideTriggerFeedback.js-open-p(data-open="youtube")

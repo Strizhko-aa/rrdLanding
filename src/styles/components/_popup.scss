@@ -1,0 +1,287 @@
+.popup {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	display: none;
+	z-index: 300;
+	background: rgba(4, 119, 189, 0.6);
+
+	@include tablet {
+		max-height: 100%;
+		height: 100%;
+		overflow: scroll;
+	}
+
+	h5 {
+		max-width: 600px;
+		width: 100%;
+		font-family: $font-med;
+		font-size: 1.5rem;
+		line-height: 2rem;
+		letter-spacing: 0.03em;
+		color: $blue;
+		text-align: center;
+		margin: 0px auto 35px;
+	}
+
+	&-close {
+		background: none;
+		border-radius: 50%;
+		position: absolute;
+		right: 30px;
+		top: 16px;
+		padding: 0;
+		outline: none;
+		box-shadow: none;
+		transition: all 0.35s ease-out;
+		z-index: 150;
+		opacity: 0.8;
+
+		@include tablet {
+			top: 28px;
+			right: 32px;
+		}
+
+		svg {
+			display: block;
+			width: 20px;
+			height: 20px;
+			fill: $blue;
+			transition: inherit;
+		}
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	&-inner {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100vw;
+		height: 100vh;
+
+		@include tabletMedium {
+			padding: 40px 30px;
+			position: relative;
+			height: 100vh;
+		}
+	}
+
+	&-wrapper {
+		max-width: 815px;
+		width: 100%;
+		padding: 4.5em 3em;
+		background: $white;
+		border-radius: 50px;
+		position: relative;
+		transform: translateY(40px);
+		opacity: 0;
+		transition: all 0.2s linear;
+
+		@include tabletMedium {
+			padding: 3.8em 4em;
+		}
+
+		@include tablet {
+			padding: 4em 0.5em;
+		}
+	}
+
+	&-wrapper.sUp {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+
+
+	&-form {
+		@include tablet {
+			padding: 0px 15px;
+		}
+
+		&-field {
+			max-width: 355px;
+			width: 100%;
+			margin: 0px auto 30px;
+			position: relative;
+
+			&:last-child {
+				margin: 0px auto;
+			}
+		}
+	}
+
+
+	.is-focused {
+		label {
+			transform: translate(-20px, -45px);
+			color: $blue;
+		}
+	}
+
+	.checkbox-field {
+		margin-top: -10px;
+
+		label {
+			position: relative;
+			display: inline-block;
+			vertical-align: middle;
+			left: 0;
+			top: 0;
+			transform: translate(0%, 0%);
+		}
+
+		input[type=checkbox] {
+			display: none;
+		}
+
+		input[type=checkbox]+label:before {
+			content: '';
+			display: inline-block;
+			vertical-align: bottom;
+			width: 16px;
+			height: 16px;
+			margin-right: 6px;
+			border: 1px solid rgba(4, 119, 189, 0.6);
+		}
+
+		input[type=checkbox]:checked+label:before {
+			background: url('../img/check.svg') 2px 2px no-repeat;
+			background-size: 10px 10px;
+		}
+
+		&.is-focused label {
+			transform: translate(0px, 0px);
+		}
+
+		.validate-message {
+			bottom: -20px;
+		}
+	}
+
+
+	input {
+		display: block;
+		width: 100%;
+		height: 44px;
+		border: 1px solid rgba(4, 119, 189, 0.4);
+		border-radius: 15px;
+		font-family: $font-reg;
+		font-size: 0.65rem;
+		color: $dark;
+		background: $white;
+		padding-left: 25px;
+		padding-right: 15px;
+		outline: none;
+		box-shadow: none;
+
+		@include tablet {
+			font-size: 1rem;
+		}
+	}
+
+	label {
+		font-family: $font-reg;
+		font-size: 0.5rem;
+		color: $dark;
+		color: rgba(33, 33, 33, 0.6);
+		letter-spacing: 0.03em;
+		position: absolute;
+		left: 25px;
+		top: 50%;
+		transform: translate(0%, -50%);
+		transition: all 0.45s;
+		z-index: 5;
+
+		@include tablet {
+			font-size: 0.75rem;
+		}
+	}
+
+	button {
+		display: block;
+		height: 45px;
+		border-radius: 15px;
+		margin: 0px auto;
+		font-family: $font-med;
+		color: $white;
+		font-size: 0.66rem;
+		letter-spacing: 0.03em;
+		outline: none;
+		text-align: center;
+		transition: all 0.35s ease-out;
+
+		@include tablet {
+			font-size: 0.9rem;
+		}
+	}
+
+	.validate-message {
+		position: absolute;
+		left: 5px;
+		bottom: -27px;
+		background-color: $white;
+		font-family: $font-reg;
+		font-size: 0.5rem;
+		line-height: 1rem;
+		text-align: left;
+		color: $error;
+		z-index: 10;
+
+		@include tablet {
+			font-size: 0.75rem;
+			bottom: -24px;
+		}
+	}
+
+	&.success-popup h5 {
+		color: $accent;
+		margin: 0px auto;
+	}
+
+	&.login-popup button[type="submit"] {
+		width: 129px;
+		background: $blue;
+
+		&:hover {
+			background: $hovered;
+		}
+	}
+
+	&.registration-popup button[type="submit"] {
+		width: 219px;
+		background: $accent;
+
+		&:hover {
+			background: $hoveredDark;
+		}
+	}
+
+	.youtube-wrapper {
+		padding-top: 3em;
+		padding-bottom: 2em;
+	}
+	// .popup-close-youtube {
+	// 	top: 20px;
+	// }
+}
+
+button.hideTrigger {
+	opacity: 0;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+button.hideTriggerFeedback {
+	opacity: 0;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}

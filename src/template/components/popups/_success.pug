@@ -1,0 +1,8 @@
+mixin success()
+    div.success-popup.popup(data-animate="true")
+        div.popup-inner
+            div.popup-wrapper(data-animation-name="sUp")
+                button.popup-close.js-close-popup
+                    +svg('cross')
+                h5 Мы уже получили Ваш запрос, скоро перезвоним.
+    button.hideTrigger.js-open-p(data-open="success-popup")

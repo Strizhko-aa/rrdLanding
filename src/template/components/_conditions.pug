@@ -1,0 +1,20 @@
+mixin conditions()
+    section.conditions.js-section#conditions
+        .container 
+            h2 Условия
+            .conditions-wrap
+                .conditions-image
+                    img(src="./static/img/condition.png", alt="Condition image")
+                .conditions-tabs
+                    .conditions-item
+                        .conditions-item-title.js-open-tab
+                            h4 Облачная платформа
+                            +svg('arrow')
+                        .conditions-item-text.js-slide-down
+                            p Данный вариант подходит для большинства пользователей и&nbsp;компаний. Ваши данные под надежной защитой, мы&nbsp;сами заботимся о&nbsp;резервном копировании, обновлении системного программного обеспечения и&nbsp;делаем многое и&nbsp;многое, чтобы rrdoc всегда был доступен.
+                    .conditions-item
+                        .conditions-item-title.js-open-tab
+                            h4 Установка на вашем сервере
+                            +svg('arrow')
+                        .conditions-item-text.js-slide-down
+                            p Данный вариант подходит для клиентов, желающих иметь собственную платформу rrdoc. По&nbsp;запросу мы&nbsp;готовы провести установку и&nbsp;оказать услуги по&nbsp;комплексной интеграции сервиса в&nbsp;существующую программно-аппратную инфраструктуру заказчика.

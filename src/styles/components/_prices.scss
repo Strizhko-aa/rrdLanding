@@ -1,0 +1,437 @@
+.prices {
+	padding-top: 120px;
+	min-height: 730px;
+	width: 100%;
+	position: relative;
+	z-index: 2;
+
+
+	@media (min-width: 1921px) {
+		background: linear-gradient(155.29deg, #27AE60 -21.76%, #0477BD 74.37%), linear-gradient(152.5deg, #2156DF 17.61%, #0477BD 79.53%), #0477BD;
+		padding-bottom: 60px;
+		padding-top: 80px;
+	}
+
+	@media (max-width: 991px) and (min-width: 320px) {
+		background: linear-gradient(149.93deg, #27AE60 -13.97%, #0477BD 64.01%);
+	}
+
+	@include tabletMedium {
+		min-height: 500px;
+		padding-bottom: 20px;
+	}
+
+	@include tablet {
+		padding-top: 55px;
+		padding-bottom: 86px;
+	}
+
+	.container {
+		position: relative;
+		z-index: 2;
+	}
+
+	&-bg {
+		display: none;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 1549px;
+		height: 730px;
+		z-index: 1;
+
+		@media (max-width: 1920px) and (min-width: 1600px) {
+			width: 2030px;
+			top: -150px;
+			display: block;
+		}
+
+		@media (max-width: 1599px) and (min-width: 1450px) {
+			width: 1610px;
+			top: -15px;
+			display: block;
+		}
+
+		@media (max-width: 1449px) and (min-width: 992px) {
+			display: block;
+			width: 1560px;
+			top: 0px;
+			left: -90px;
+		}
+	}
+
+	h2 {
+		color: $white;
+		margin-bottom: 20px;
+	}
+
+	p {
+		font-family: $font-med;
+		text-align: center;
+		font-size: 26px;
+		line-height: 30px;
+		color: $white;
+		margin-bottom: 34px;
+
+		@include tablet {
+			font-family: $font-reg;
+			font-size: 16px;
+			line-height: 20px;
+		}
+	}
+
+	&-list {
+		display: flex;
+		justify-content: flex-start;
+		align-items: stretch;
+		flex-wrap: wrap;
+
+		@media (max-width: 1160px) and (min-width: 767px) {
+			justify-content: space-around;
+		}
+	}
+
+	&-card {
+		display: flex;
+		justify-content: space-between;
+		flex-direction: column;
+		width: calc(100%/3 - 20px);
+		margin-right: 30px;
+		background: #FAFCFE;
+		box-shadow: 0px 4px 30px rgba(4, 119, 189, 0.3);
+		border-radius: 15px;
+		position: relative;
+		padding: 25px 27px 40px;
+
+		@media (max-width: 1160px) and (min-width: 767px) {
+			width: calc(100%/2 - 25px);
+			margin-right: 50px;
+			margin-bottom: 40px;
+		}
+
+		@include tablet {
+			width: 100%;
+			max-width: 400px;
+			margin: 0px auto 40px;
+			padding: 20px 30px 27px;
+		}
+
+
+
+		h3 {
+			display: block;
+			width: 100%;
+			padding-bottom: 12px;
+			margin-bottom: 8px;
+			border-bottom: 1px solid rgba(4, 119, 189, 0.6);
+			color: $blue;
+			font-family: $font-bold;
+			font-size: 26px;
+			line-height: 32px;
+			text-align: center;
+
+			@include tablet {
+				font-size: 18px;
+				line-height: 22px;
+				padding-bottom: 10px;
+			}
+		}
+
+		li {
+			font-family: $font-reg;
+			font-size: 16px;
+			line-height: 20px;
+			color: rgba(33, 33, 33, 0.8);
+			position: relative;
+			padding-left: 20px;
+			margin-bottom: 13px;
+
+			@include tablet {
+				font-size: 14px;
+				line-height: 18px;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			&.inActive {
+				color: rgba(33, 33, 33, 0.35);
+
+				&:before {
+					background-color: rgba(33, 33, 33, 0.35);
+				}
+			}
+
+			&:before {
+				content: '';
+				display: block;
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+				background-color: #F84C1B;
+				position: absolute;
+				left: 0;
+				top: 4px;
+			}
+		}
+
+		.bonus {
+			font-family: $font-med;
+			font-size: 18px;
+			line-height: 22px;
+			color: rgba(4, 119, 189, 0.6);
+			text-align: left;
+			margin-bottom: 16px;
+			text-align: center;
+
+			span {
+				text-decoration: underline;
+				cursor: pointer;
+			}
+
+			@media (max-width: 1160px) and (min-width: 767px) {
+				min-height: 44px;
+			}
+
+			@include tablet {
+				font-size: 16px;
+				line-height: 20px;
+			}
+
+		}
+
+		&:first-child {
+			.bonus {
+				margin-bottom: 37px;
+
+				@media (max-width: 1160px) and (min-width: 767px) {
+					margin-bottom: 16px;
+				}
+
+				@include tablet {
+					margin-bottom: 16px;
+				}
+			}
+
+		}
+
+		&:nth-child(2) {
+			transform: translateY(40px);
+
+			@media (max-width: 1160px) and (min-width: 767px) {
+				margin-right: 0;
+				transform: translateY(0px);
+			}
+
+			@include tablet {
+				transform: translateY(0px);
+
+				@include tablet {
+					margin: 0px auto 40px;
+				}
+			}
+		}
+
+		&:last-child {
+			margin-right: 0;
+
+			@media (max-width: 1160px) and (min-width: 767px) {
+				margin-bottom: 0px;
+			}
+
+			@include tablet {
+				margin: 0px auto 0px;
+			}
+		}
+
+		.price {
+			display: block;
+			width: 100%;
+			font-family: $font-med;
+			color: $blue;
+			font-size: 40px;
+			line-height: 44px;
+			text-align: center;
+
+			@include tablet {
+				font-size: 32px;
+				line-height: 36px;
+			}
+		}
+
+		.duration {
+			display: block;
+			width: 100%;
+			font-family: $font-reg;
+			font-size: 14px;
+			line-height: 18px;
+			color: rgba(33, 33, 33, 0.8);
+			text-align: center;
+			margin-bottom: 33px;
+
+			@include tablet {
+				font-size: 12px;
+				line-height: 16px;
+			}
+		}
+
+		.choose {
+			display: block;
+			width: 188px;
+			height: 51px;
+			margin: 0 auto;
+			padding: 0;
+			outline: none;
+			box-shadow: none;
+			background: transparent;
+			border: 2px solid $blue;
+			border-radius: 20px;
+			font-family: $font-med;
+			font-size: 20px;
+			color: rgba(33, 33, 33, 0.8);
+			transition: all 0.35s ease-out;
+
+			&:hover {
+				background: $blue;
+				color: $white;
+			}
+
+			@include tablet {
+				width: 160px;
+				height: 36px;
+				font-size: 18px;
+			}
+		}
+
+		.present {
+			margin-top: 15px;
+			margin-bottom: 12px;
+
+			svg {
+				display: block;
+				margin: 0px auto 5px;
+				fill: $blue;
+				width: 38px;
+				height: 38px;
+			}
+
+			p {
+				font-family: $font-med;
+				font-size: 14px;
+				line-height: 18px;
+				text-align: center;
+				color: rgba(33, 33, 33, 0.8);
+			}
+
+			a {
+				text-decoration: none;
+				color: $blue;
+				transition: color 0.35s ease-out;
+
+				&:hover {
+					color: $accent;
+				}
+			}
+		}
+	}
+
+
+	.gray-text {
+		font-family: $font-reg;
+		font-size: 14px;
+		line-height: 18px;
+		color: rgba(0, 0, 0, 0.45);
+		text-align: left;
+		margin-top: 42px;
+
+		@media (min-width: 1921px) {
+			color: $white;
+		}
+
+		@include tabletMedium {
+			color: $white;
+		}
+
+		@include tablet {
+			display: none;
+		}
+	}
+
+	.bonus-tooltip {
+		opacity: 0;
+		width: 100%;
+		padding: 20px 28px;
+		border-radius: 13px 13px 0px 0px;
+		background-color: $blue;
+		font-family: $font-reg;
+		font-size: 14px;
+		line-height: 18px;
+		color: $white;
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 10;
+		transition: opacity 0.35s ease-out;
+
+		@media (max-width: 992px) and (min-width: 875px) {
+			padding: 20px 15px;
+		}
+
+		@media (max-width: 874px) and (min-width: 766px) {
+			padding: 20px 15px;
+		}
+
+		@include tablet {
+			padding: 10px 13px;
+			font-size: 12px;
+			line-height: 16px;
+		}
+
+		@media (max-width: 380px) {
+			padding: 22px 15px;
+		}
+
+		@media (max-width: 360px) {
+			padding: 15px 15px;
+		}
+
+		span {
+			font-family: $font-bold;
+			text-decoration: none;
+		}
+
+		&:after {
+			content: '';
+			display: block;
+			width: 0;
+			height: 0;
+			border: 0 solid transparent;
+			border-left-width: 15px;
+			border-right-width: 15px;
+			border-top: 15px solid $blue;
+			position: absolute;
+			left: 50%;
+			bottom: -8px;
+			transform: translate(-50%, 0%);
+
+			@media (max-width: 1160px) and (min-width: 885px) {
+				left: 75%;
+			}
+
+			@include tablet {
+				left: 75%;
+			}
+
+			@media (max-width: 380px) {
+				left: 50%;
+			}
+
+		}
+	}
+
+	.bonus span:hover .bonus-tooltip {
+		opacity: 1;
+	}
+
+}

@@ -1,0 +1,47 @@
+include ../partials/_variables
+include ../partials/_mixins
+
+- var suffix = production ? '.min' : '';
+- var isDark = false;
+
+doctype html
+html(lang='ru')
+
+    block variables
+        - var title = defaultPageTitle;
+
+    block head
+        head
+          include ../partials/_head
+
+    block body
+        body
+            // SVG
+            block svg
+                div.svg-container(style="position: absolute; width: 0; height: 0; overflow: hidden;")
+                    include ../partials/_sprite.svg
+
+            // picture element HTML5 shiv
+            block inlineScripts
+                script.
+                  document.createElement('picture');
+
+            // Header
+            block header
+                +header()
+
+            // Main content
+            block main
+                main
+
+            // Footer
+            block footer
+                +footer()
+
+            // Popups
+            block popups
+                +popups
+
+            // Scripts
+            block scripts
+                script(src='static/js/index' + suffix + '.js')
