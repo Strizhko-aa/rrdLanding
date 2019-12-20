@@ -317,7 +317,7 @@ var _Form = __webpack_require__(7);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _Home = __webpack_require__(9);
+var _Home = __webpack_require__(10);
 
 var _Home2 = _interopRequireDefault(_Home);
 
@@ -344,6 +344,9 @@ switch (_helpers.currentPage) {
 	default:
 		console.warn('Undefined page');
 }
+
+/** Import rrd controller */
+// import Rrd from './components/Rrd'
 
 /** Import form controller */
 
@@ -416,6 +419,7 @@ var Common = exports.Common = function () {
 			this.inputFocus();
 			this.openTabs();
 			this.getActiveSceen();
+			this.selectTarif();
 		}
 	}, {
 		key: 'resizeCheck',
@@ -459,6 +463,21 @@ var Common = exports.Common = function () {
 				burger.classList.toggle("is-open");
 				mainMenu.classList.toggle("menu-open");
 			});
+		}
+	}, {
+		key: 'selectTarif',
+		value: function selectTarif() {
+			var prises = document.querySelectorAll('.choose');
+			for (var index = 0; index < prises.length; index++) {
+				var elem = prises[index];
+				elem.addEventListener('click', function () {
+					localStorage.setItem('wantToSeeTariffs', true);
+					// host
+					window.location.href = 'https://rrdoc.ru/profile';
+					// window.location.href = 'http://rrdoc.itt/profile'
+					// window.location.href = 'http://localhost:8088/profile'
+				});
+			}
 		}
 	}, {
 		key: 'scrollTo',
@@ -623,6 +642,7 @@ var Common = exports.Common = function () {
 			var handleIntersectionEvent = function handleIntersectionEvent(entries) {
 				var scrollTop = document.documentElement.scrollTop;
 				_this2.state.blockBreakpoints.find(function (bp, index) {
+					// console.log(bp, index)
 					if (Math.abs(scrollTop - bp) < 100) {
 						_this2.state.activeBlock = index;
 						_this2.state.anchorLinks.forEach(function (link) {
@@ -1571,6 +1591,12 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _Validators = __webpack_require__(8);
 
+var _Rrd = __webpack_require__(9);
+
+var _Rrd2 = _interopRequireDefault(_Rrd);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Form = exports.Form = function () {
@@ -1581,10 +1607,10 @@ var Form = exports.Form = function () {
 		this.state = {
 			formValid: false,
 			currentForm: null,
-			apiHost: 'http://api.rrdoc.itt', // host dev
-			origin: 'http://rrdoc.itt'
-			// apiHost: 'https://api.rrdoc.ru',	// host prod
-			// origin: 'https://rrdoc.ru'
+			// apiHost: 'http://api.rrdoc.itt',	// host dev
+			// origin: 'http://rrdoc.itt',
+			apiHost: 'https://api.rrdoc.ru', // host prod
+			origin: 'https://rrdoc.ru'
 		};
 
 		window.localStorage.setItem('didYouSeeOurLanding', true);
@@ -1599,32 +1625,32 @@ var Form = exports.Form = function () {
 		key: 'validateFields',
 		value: function validateFields(fields) {
 			for (var index = 0; index < fields.length; index++) {
-				var field = fields[index];
-				var type = field.getAttribute('name');
+				var _field = fields[index];
+				var type = _field.getAttribute('name');
 				switch (type) {
 					case 'name':
-						_Validators.Validator.validateName(field);
+						_Validators.Validator.validateName(_field);
 						break;
 					case 'email':
-						_Validators.Validator.validateEmail(field);
+						_Validators.Validator.validateEmail(_field);
 						break;
 					case 'passwordLogin':
-						_Validators.Validator.setValid(field);
+						_Validators.Validator.setValid(_field);
 						break;
 					case 'password':
-						_Validators.Validator.validatePassword(field);
+						_Validators.Validator.validatePassword(_field);
 						break;
 					case 'privacy':
-						_Validators.Validator.validatePrivacy(field);
+						_Validators.Validator.validatePrivacy(_field);
 						break;
 					case 'password-repeat':
 						_Validators.Validator.validateConfirmPassword(fields[1], fields[2]);
 						break;
 					case 'phone':
-						_Validators.Validator.validatePhone(field, 7, 20);
+						_Validators.Validator.validatePhone(_field, 7, 20);
 						break;
 					case 'messege':
-						_Validators.Validator.validateMessege(field);
+						_Validators.Validator.validateMessege(_field);
 						break;
 					default:
 						break;
@@ -1674,41 +1700,6 @@ var Form = exports.Form = function () {
 			}
 		}
 	}, {
-		key: 'setAuthCookieForFeedback',
-		value: function setAuthCookieForFeedback() {
-			var _this2 = this;
-
-			return new Promise(function (resolve) {
-				if (_this2.getCookie('authHeader') !== undefined) {
-					// если токен есть
-					resolve(_this2.getCookie('authHeader')); // если уже есть токен
-				} else {
-					// если токена нет, то получить
-					var $formdata = new FormData();
-					$formdata = {
-						email: 'demo@rrdoc.ru',
-						password: 'mLxkElOQ9mmw'
-					};
-					var _url = _this2.state.apiHost + "/rest-auth/login/";
-					var request = new XMLHttpRequest();
-					request.open("POST", _url);
-					request.open("POST", _url);
-					request.setRequestHeader('Accept', 'application/json, text/plain, application/zip, */*');
-					request.setRequestHeader('Accept-Language', 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7');
-					request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-					request.send(JSON.stringify($formdata));
-					var self = _this2;
-					request.onload = function () {
-						if (request.status === 200) {
-							var _cookieHeader = 'authHeader=' + JSON.parse(request.responseText).token + ';path=/'; // куки с новым токеном
-							document.cookie = _cookieHeader;
-							resolve(JSON.parse(request.responseText).token);
-						}
-					};
-				}
-			});
-		}
-	}, {
 		key: 'getCookie',
 		value: function getCookie(name) {
 			var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
@@ -1717,129 +1708,17 @@ var Form = exports.Form = function () {
 	}, {
 		key: 'sendFeedBack',
 		value: function sendFeedBack(fields, mode) {
-			var _this3 = this;
-
-			this.setAuthCookieForFeedback().then(function (header) {
-				var $formdata = new FormData();
-				if (mode === "callBackForm") {
-					$formdata = {
-						title: 'ПОЗВОНИ МНЕ',
-						text: fields[0].value
-					};
-				} else if (mode === "hasQuestion") {
-					$formdata = {
-						title: fields[1].value,
-						text: "Имя обратившегося " + fields[0].value + "\n" + fields[2].value
-					};
-				}
-				_this3.postFeedBack($formdata).then(function () {
-					if (mode === "callBackForm") {
-						document.querySelector('.hideTrigger').click();
-					} else {
-						document.querySelector('.hideTriggerFeedback').click();
-					}
-				});
-			});
-		}
-	}, {
-		key: 'postFeedBack',
-		value: function postFeedBack(data) {
-			var _this4 = this;
-
-			return new Promise(function (resolve) {
-				var _url = _this4.state.apiHost + '/api/v1/feedback/feed/';
-				var request = new XMLHttpRequest();
-				request.open("POST", _url);
-				request.open("POST", _url);
-				request.setRequestHeader('Accept', 'application/json, text/plain, application/zip, */*');
-				request.setRequestHeader('Accept-Language', 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7');
-				request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-				request.setRequestHeader('Authorization', 'Bearer ' + _this4.getCookie('authHeader'));
-				request.send(JSON.stringify(data));
-				var self = _this4;
-				request.onload = function () {
-					if (request.status === 200 || request.status === 201) {
-						resolve();
-						// self.successModal();
-						// document.querySelector('.hideTriggerFeedback').click();
-					}
-				};
-			});
+			_Rrd2.default.sendFeedBack(fields, mode);
 		}
 	}, {
 		key: 'registration',
 		value: function registration(fields) {
-			var $formdata = new FormData();
-			$formdata = {
-				username: fields[0].value,
-				email: fields[0].value,
-				password1: fields[1].value,
-				password2: fields[2].value,
-				first_name: 'default',
-				last_name: 'default',
-				is_boss: false
-			};
-			var _url = this.state.apiHost + "/rest-auth/registration/";
-			var request = new XMLHttpRequest();
-			request.open("POST", _url);
-			request.setRequestHeader('Accept', 'application/json, text/plain, application/zip, */*');
-			request.setRequestHeader('Accept-Language', 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7');
-			request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-			request.send(JSON.stringify($formdata));
-			var self = this;
-			request.onload = function () {
-				if (request.status === 201) {
-					alert('Не забудьте подтвердить свою почту');
-					var _link = self.state.origin + '/login';
-					document.location.href = _link;
-				} else {
-					// alert('Не удлось зарегистрировать пользователя')
-					var err = JSON.parse(request.responseText);
-					console.log(err);
-					var _errMessage = err.email[0] || err.password1[0] || err.username[0] || 'Не удалось зарегестрировать пользователя';
-					_Validators.Validator.setInvalid(fields[3], _errMessage);
-				}
-			};
-			request.onerror = function (err) {
-				// alert('Не удалось зарегистрировать пользователя')
-				console.log(err);
-				var _errMessage = err.email[0] || err.password1[0] || err.username[0] || 'Не удалось зарегестрировать пользователя';
-				_Validators.Validator.setInvalid(fields[3], _errMessage);
-			};
+			_Rrd2.default.registration(fields);
 		}
 	}, {
 		key: 'login',
 		value: function login(fields) {
-			var $formdata = new FormData();
-			$formdata = {
-				email: fields[0].value,
-				password: fields[1].value
-			};
-			var _url = this.state.apiHost + "/rest-auth/login/";
-			var request = new XMLHttpRequest();
-			request.open("POST", _url);
-			request.setRequestHeader('Accept', 'application/json, text/plain, application/zip, */*');
-			request.setRequestHeader('Accept-Language', 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7');
-			request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-			request.send(JSON.stringify($formdata));
-			var self = this;
-			request.onload = function () {
-				if (request.status === 200) {
-					document.cookie = 'email="from@landing.com"; path=/; max-age=360'; // замена emai (может отстаться от демо-юзера и глядя на email основной клиент ставит флаг demoMode на true)
-					document.cookie = 'rrdtkn=""; path=/; max-age=-1'; // на всякий случай удаление токена
-					var _rrdtkn = 'rrdtkn=' + JSON.parse(request.responseText).token + ';path=/' + ';max-age=360'; // новый токен
-					document.cookie = _rrdtkn; // установка токена
-					var _link = self.state.origin;
-					document.location.href = _link; // переход на основной клиент
-				} else if (request.status === 400) {
-					// alert('Не правильные логин или пароль')
-					_Validators.Validator.setInvalid(fields[1], 'Не верные логин или пароль');
-				}
-			};
-			request.onerror = function (err) {
-				console.log(err);
-				alert('Не удалось войти');
-			};
+			_Rrd2.default.login(field);
 		}
 	}, {
 		key: 'successModal',
@@ -2065,6 +1944,278 @@ Validator.setInvalid = function (field, message) {
 
 /***/ }),
 /* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Website's common scripts (example).
+ *
+ * @module Rrd
+ */
+
+var Rrd = exports.Rrd = function () {
+	function Rrd() {
+		_classCallCheck(this, Rrd);
+
+		var self = this;
+		this.state = {
+			authorized: false,
+
+			// urls
+			// apiHost: 'http://api.rrdoc.itt',	// host dev
+			// origin: 'http://rrdoc.itt',
+			apiHost: 'https://api.rrdoc.ru', // host prod
+			origin: 'https://rrdoc.ru',
+			validToken: '/rest-auth/api-token-verify/'
+		};
+
+		// initialize after construction
+		self.init();
+	}
+
+	/**
+  * Initialize common scripts.
+  */
+
+
+	_createClass(Rrd, [{
+		key: 'init',
+		value: function init() {
+			// this.state = this.checkAuth();
+			this.setFlagSeeLanding();
+			this.setAuthCookieForFeedback();
+		}
+
+		// checkAuth () {
+		//   let tkn = this.getCookie('rrdtkn');
+		//   if (tkn !== undefined) {
+		//     let tknValid = this.checkValidToken(tkn);
+		//     if (tknValid === true) {
+		//       // this.startUpdateToken();
+		//       return true;
+		//     }
+		//   }
+		//   return false;
+		// }
+
+		// checkValidToken (tkn) {
+		//   let _url = this.state.apiHost + this.state.validToken
+		//   this.sendReqest('POST', _url, {token: tkn})
+		// }
+
+	}, {
+		key: 'setAuthCookieForFeedback',
+		value: function setAuthCookieForFeedback() {
+			var _this = this;
+
+			return new Promise(function (resolve) {
+				if (_this.getCookie('authHeader') !== undefined) {
+					// если токен есть
+					resolve(_this.getCookie('authHeader')); // если уже есть токен
+				} else {
+					// если токена нет, то получить
+					var $formdata = new FormData();
+					$formdata = {
+						email: 'demo@rrdoc.ru',
+						password: 'mLxkElOQ9mmw'
+					};
+					var _url = _this.state.apiHost + "/rest-auth/login/";
+					var request = new XMLHttpRequest();
+					request.open("POST", _url);
+					request.open("POST", _url);
+					request.setRequestHeader('Accept', 'application/json, text/plain, application/zip, */*');
+					request.setRequestHeader('Accept-Language', 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7');
+					request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+					request.send(JSON.stringify($formdata));
+					var self = _this;
+					request.onload = function () {
+						if (request.status === 200) {
+							var _cookieHeader = 'authHeader=' + JSON.parse(request.responseText).token + ';path=/;max-age=3600'; // куки с новым токеном
+							document.cookie = _cookieHeader;
+							resolve(JSON.parse(request.responseText).token);
+						}
+					};
+				}
+			});
+		}
+	}, {
+		key: 'sendFeedBack',
+		value: function sendFeedBack(fields, mode) {
+			var _this2 = this;
+
+			this.setAuthCookieForFeedback().then(function (header) {
+				var $formdata = new FormData();
+				if (mode === "callBackForm") {
+					$formdata = {
+						title: 'ПОЗВОНИ МНЕ',
+						text: fields[0].value
+					};
+				} else if (mode === "hasQuestion") {
+					$formdata = {
+						title: fields[1].value,
+						text: "Имя обратившегося " + fields[0].value + "\n" + fields[2].value
+					};
+				}
+				_this2.postFeedBack($formdata).then(function () {
+					if (mode === "callBackForm") {
+						document.querySelector('.hideTrigger').click();
+					} else {
+						document.querySelector('.hideTriggerFeedback').click();
+					}
+				});
+			});
+		}
+	}, {
+		key: 'postFeedBack',
+		value: function postFeedBack(data) {
+			var _this3 = this;
+
+			return new Promise(function (resolve) {
+				var _url = _this3.state.apiHost + '/api/v1/feedback/feed/';
+				var request = new XMLHttpRequest();
+				request.open("POST", _url);
+				request.open("POST", _url);
+				request.setRequestHeader('Accept', 'application/json, text/plain, application/zip, */*');
+				request.setRequestHeader('Accept-Language', 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7');
+				request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+				request.setRequestHeader('Authorization', 'Bearer ' + _this3.getCookie('authHeader'));
+				request.send(JSON.stringify(data));
+				var self = _this3;
+				request.onload = function () {
+					if (request.status === 200 || request.status === 201) {
+						resolve();
+						// self.successModal();
+						// document.querySelector('.hideTriggerFeedback').click();
+					}
+				};
+			});
+		}
+	}, {
+		key: 'registration',
+		value: function registration(fields) {
+			var $formdata = new FormData();
+			$formdata = {
+				username: fields[0].value,
+				email: fields[0].value,
+				password1: fields[1].value,
+				password2: fields[2].value,
+				first_name: 'default',
+				last_name: 'default',
+				is_boss: false
+			};
+			var _url = this.state.apiHost + "/rest-auth/registration/";
+			var request = new XMLHttpRequest();
+			request.open("POST", _url);
+			request.setRequestHeader('Accept', 'application/json, text/plain, application/zip, */*');
+			request.setRequestHeader('Accept-Language', 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7');
+			request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+			request.send(JSON.stringify($formdata));
+			var self = this;
+			request.onload = function () {
+				if (request.status === 201) {
+					alert('Не забудьте подтвердить свою почту');
+					var _link = self.state.origin + '/login';
+					document.location.href = _link;
+				} else {
+					// alert('Не удлось зарегистрировать пользователя')
+					var err = JSON.parse(request.responseText);
+					console.log(err);
+					var _errMessage = err.email[0] || err.password1[0] || err.username[0] || 'Не удалось зарегестрировать пользователя';
+					Validator.setInvalid(fields[3], _errMessage);
+				}
+			};
+			request.onerror = function (err) {
+				// alert('Не удалось зарегистрировать пользователя')
+				console.log(err);
+				var _errMessage = err.email[0] || err.password1[0] || err.username[0] || 'Не удалось зарегестрировать пользователя';
+				Validator.setInvalid(fields[3], _errMessage);
+			};
+		}
+	}, {
+		key: 'login',
+		value: function login(fields) {
+			var $formdata = new FormData();
+			$formdata = {
+				email: fields[0].value,
+				password: fields[1].value
+			};
+			var _url = this.state.apiHost + "/rest-auth/login/";
+			var request = new XMLHttpRequest();
+			request.open("POST", _url);
+			request.setRequestHeader('Accept', 'application/json, text/plain, application/zip, */*');
+			request.setRequestHeader('Accept-Language', 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7');
+			request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+			request.send(JSON.stringify($formdata));
+			var self = this;
+			request.onload = function () {
+				if (request.status === 200) {
+					document.cookie = 'email="from@landing.com"; path=/; max-age=360'; // замена emai (может отстаться от демо-юзера и глядя на email основной клиент ставит флаг demoMode на true)
+					document.cookie = 'rrdtkn=""; path=/; max-age=-1'; // на всякий случай удаление токена
+					var _rrdtkn = 'rrdtkn=' + JSON.parse(request.responseText).token + ';path=/' + ';max-age=360'; // новый токен
+					document.cookie = _rrdtkn; // установка токена
+					var _link = self.state.origin;
+					document.location.href = _link; // переход на основной клиент
+				} else if (request.status === 400) {
+					// alert('Не правильные логин или пароль')
+					Validator.setInvalid(fields[1], 'Не верные логин или пароль');
+				}
+			};
+			request.onerror = function (err) {
+				console.log(err);
+				alert('Не удалось войти');
+			};
+		}
+	}, {
+		key: 'sendReqest',
+		value: function sendReqest(method, url, data) {
+			var request = new XMLHttpRequest();
+			request.open(method, url);
+			request = this.setHeaders(request);
+			request.send(JSON.stringify(data));
+			return request;
+		}
+	}, {
+		key: 'setHeaders',
+		value: function setHeaders(request) {
+			request.setRequestHeader('Accept', 'application/json, text/plain, application/zip, */*');
+			request.setRequestHeader('Accept-Language', 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7');
+			request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+			return request;
+		}
+	}, {
+		key: 'getCookie',
+		value: function getCookie(name) {
+			var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+			return matches ? decodeURIComponent(matches[1]) : undefined;
+		}
+	}, {
+		key: 'setFlagSeeLanding',
+		value: function setFlagSeeLanding() {
+			window.localStorage.setItem('didYouSeeOurLanding', true);
+			document.cookie = 'authHeader="zxc"; path=/; max-age=-1';
+		}
+	}]);
+
+	return Rrd;
+}();
+
+/** Export initialized common scripts by default */
+
+
+exports.default = new Rrd();
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

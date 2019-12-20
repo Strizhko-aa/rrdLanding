@@ -21,10 +21,17 @@ mixin header()
                 span.js-links(data-to="conditions") Условия
               li
                 span.js-links(data-to="contacts") Контакты
+              li
+                span
+                  a(href="http://wiki.itt/x/AoDLAQ") API
+                  //- span API
           //- .header-btns
-            button.header-button.header-button--registration.js-open-p(data-open="registration-popup")
-              +svg('registration')
-              span Регистрация
+            //- button.header-button.header-button--registration.js-open-p(data-open="registration-popup")
+              +svg('api')
+              span API
+            button.header-button.header-button--login.js-open-p(data-open="login-popup")
+              +svg('user')
+              span Вход
             button.header-button.header-button--login.js-open-p(data-open="login-popup")
               +svg('user')
               span Вход

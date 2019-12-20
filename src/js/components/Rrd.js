@@ -11,10 +11,12 @@ export class Rrd {
       authorized: false,
       
       // urls
-      apiHost: 'http://api.rrdoc.itt',	// host dev
-			origin: 'http://rrdoc.itt',
+      // apiHost: 'http://api.rrdoc.itt',	// host dev
+			// origin: 'http://rrdoc.itt',
 			// apiHost: 'https://api.rrdoc.ru',	// host prod
       // origin: 'https://rrdoc.ru',
+			apiHost: 'http://10.0.18.242:81',	// host prod
+      origin: 'http://10.0.18.242:80',
       validToken: '/rest-auth/api-token-verify/'
 		};
 
@@ -162,7 +164,41 @@ export class Rrd {
 			let _errMessage = err.email[0] || err.password1[0] || err.username[0] || 'Не удалось зарегестрировать пользователя'
 			Validator.setInvalid(fields[3], _errMessage)
 		}
-	}
+  }
+  
+  login (fields) {
+    let $formdata = new FormData();
+		$formdata = {
+			email: fields[0].value,
+			password: fields[1].value
+		}
+		let _url = this.state.apiHost + "/rest-auth/login/";
+		let request = new XMLHttpRequest();
+		request.open("POST", _url);
+		request.setRequestHeader('Accept', 'application/json, text/plain, application/zip, */*');
+		request.setRequestHeader('Accept-Language', 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7');
+		request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+		request.send(JSON.stringify($formdata));
+		let self = this;
+		request.onload = function () {
+			if (request.status === 200) {
+				document.cookie = ('email="from@landing.com"; path=/; max-age=360')	// замена emai (может отстаться от демо-юзера и глядя на email основной клиент ставит флаг demoMode на true)
+				document.cookie = ('rrdtkn=""; path=/; max-age=-1')	// на всякий случай удаление токена
+				let _rrdtkn = 'rrdtkn=' + JSON.parse(request.responseText).token + ';path=/' + ';max-age=360';	// новый токен
+				document.cookie = (_rrdtkn);	// установка токена
+				let _link = self.state.origin;
+				document.location.href = _link;	// переход на основной клиент
+
+			} else if (request.status === 400) {
+				// alert('Не правильные логин или пароль')
+				Validator.setInvalid(fields[1], 'Не верные логин или пароль')
+			}
+		}
+		request.onerror = function (err) {
+			console.log(err)
+			alert('Не удалось войти')
+		}
+  }
 
   sendReqest (method, url, data) {
     let request = new XMLHttpRequest();

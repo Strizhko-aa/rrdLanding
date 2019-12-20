@@ -46,6 +46,7 @@ export class Common {
 		this.inputFocus();
 		this.openTabs();
 		this.getActiveSceen();
+		this.selectTarif();
 	}
 
 	resizeCheck() {
@@ -86,6 +87,20 @@ export class Common {
 			burger.classList.toggle("is-open");
 			mainMenu.classList.toggle("menu-open");
 		});
+	}
+
+	selectTarif () {
+		const prises = document.querySelectorAll('.choose');
+		for (let index = 0; index < prises.length; index++) {
+			let elem = prises[index];
+			elem.addEventListener('click', () => {
+				localStorage.setItem('wantToSeeTariffs', true);
+				// host
+				window.location.href = 'http://10.0.18.242:80/profile'
+				// window.location.href = 'http://rrdoc.itt/profile'
+				// window.location.href = 'http://localhost:8088/profile'
+			});
+		}
 	}
 
 	scrollTo(destination, duration = 200, easing = 'linear', callback) {

@@ -317,7 +317,7 @@ var _Form = __webpack_require__(7);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _Home = __webpack_require__(9);
+var _Home = __webpack_require__(10);
 
 var _Home2 = _interopRequireDefault(_Home);
 
@@ -419,6 +419,7 @@ var Common = exports.Common = function () {
 			this.inputFocus();
 			this.openTabs();
 			this.getActiveSceen();
+			this.selectTarif();
 		}
 	}, {
 		key: 'resizeCheck',
@@ -462,6 +463,21 @@ var Common = exports.Common = function () {
 				burger.classList.toggle("is-open");
 				mainMenu.classList.toggle("menu-open");
 			});
+		}
+	}, {
+		key: 'selectTarif',
+		value: function selectTarif() {
+			var prises = document.querySelectorAll('.choose');
+			for (var index = 0; index < prises.length; index++) {
+				var elem = prises[index];
+				elem.addEventListener('click', function () {
+					localStorage.setItem('wantToSeeTariffs', true);
+					// host
+					window.location.href = 'http://10.0.18.242:80/profile';
+					// window.location.href = 'http://rrdoc.itt/profile'
+					// window.location.href = 'http://localhost:8088/profile'
+				});
+			}
 		}
 	}, {
 		key: 'scrollTo',
@@ -1575,7 +1591,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _Validators = __webpack_require__(8);
 
-var _Rrd = __webpack_require__(10);
+var _Rrd = __webpack_require__(9);
 
 var _Rrd2 = _interopRequireDefault(_Rrd);
 
@@ -1593,8 +1609,8 @@ var Form = exports.Form = function () {
 			currentForm: null,
 			// apiHost: 'http://api.rrdoc.itt',	// host dev
 			// origin: 'http://rrdoc.itt',
-			apiHost: 'https://api.rrdoc.ru', // host prod
-			origin: 'https://rrdoc.ru'
+			apiHost: 'http://10.0.18.242:81', // host prod
+			origin: 'http://10.0.18.242:80'
 		};
 
 		window.localStorage.setItem('didYouSeeOurLanding', true);
@@ -1609,32 +1625,32 @@ var Form = exports.Form = function () {
 		key: 'validateFields',
 		value: function validateFields(fields) {
 			for (var index = 0; index < fields.length; index++) {
-				var field = fields[index];
-				var type = field.getAttribute('name');
+				var _field = fields[index];
+				var type = _field.getAttribute('name');
 				switch (type) {
 					case 'name':
-						_Validators.Validator.validateName(field);
+						_Validators.Validator.validateName(_field);
 						break;
 					case 'email':
-						_Validators.Validator.validateEmail(field);
+						_Validators.Validator.validateEmail(_field);
 						break;
 					case 'passwordLogin':
-						_Validators.Validator.setValid(field);
+						_Validators.Validator.setValid(_field);
 						break;
 					case 'password':
-						_Validators.Validator.validatePassword(field);
+						_Validators.Validator.validatePassword(_field);
 						break;
 					case 'privacy':
-						_Validators.Validator.validatePrivacy(field);
+						_Validators.Validator.validatePrivacy(_field);
 						break;
 					case 'password-repeat':
 						_Validators.Validator.validateConfirmPassword(fields[1], fields[2]);
 						break;
 					case 'phone':
-						_Validators.Validator.validatePhone(field, 7, 20);
+						_Validators.Validator.validatePhone(_field, 7, 20);
 						break;
 					case 'messege':
-						_Validators.Validator.validateMessege(field);
+						_Validators.Validator.validateMessege(_field);
 						break;
 					default:
 						break;
@@ -1683,38 +1699,6 @@ var Form = exports.Form = function () {
 				});
 			}
 		}
-
-		// setAuthCookieForFeedback () {
-		// 	return new Promise(resolve => {
-		// 		if (this.getCookie('authHeader') !== undefined) {	// если токен есть
-		// 			resolve(this.getCookie('authHeader'))	// если уже есть токен
-		// 		} else { // если токена нет, то получить
-		// 			let $formdata = new FormData();
-		// 			$formdata = {
-		// 				email: 'demo@rrdoc.ru',
-		// 				password: 'mLxkElOQ9mmw'
-		// 			};
-		// 			let _url = this.state.apiHost + "/rest-auth/login/";
-		// 			let request = new XMLHttpRequest();
-		// 			request.open("POST", _url)
-		// 			request.open("POST", _url);
-		// 			request.setRequestHeader('Accept', 'application/json, text/plain, application/zip, */*');
-		// 			request.setRequestHeader('Accept-Language', 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7');
-		// 			request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-		// 			request.send(JSON.stringify($formdata));
-		// 			let self = this;
-		// 			request.onload = function () {
-		// 				if (request.status === 200) {
-		// 					let _cookieHeader = 'authHeader=' + JSON.parse(request.responseText).token + ';path=/';	// куки с новым токеном
-		// 					document.cookie = (_cookieHeader)
-		// 					resolve(JSON.parse(request.responseText).token)
-		// 				}
-		// 			}
-		// 		}
-		// 	})
-		// }
-
-
 	}, {
 		key: 'getCookie',
 		value: function getCookie(name) {
@@ -1725,126 +1709,16 @@ var Form = exports.Form = function () {
 		key: 'sendFeedBack',
 		value: function sendFeedBack(fields, mode) {
 			_Rrd2.default.sendFeedBack(fields, mode);
-			// this.setAuthCookieForFeedback().then(header => {
-			// 	let $formdata = new FormData();
-			// 	if (mode === "callBackForm") {
-			// 		$formdata = {
-			// 			title: 'ПОЗВОНИ МНЕ',
-			// 			text: fields[0].value
-			// 		};
-			// 	} else if (mode === "hasQuestion") {
-			// 		$formdata = {
-			// 			title: fields[1].value,
-			// 			text: "Имя обратившегося " + fields[0].value + "\n" + fields[2].value
-			// 		}
-			// 	}
-			// 	this.postFeedBack($formdata).then(function () {
-			// 		if (mode === "callBackForm") {
-			// 			document.querySelector('.hideTrigger').click();
-			// 		} else {
-			// 			document.querySelector('.hideTriggerFeedback').click();
-			// 		}
-			// 	});
-			// })
 		}
-
-		// postFeedBack (data) {
-		// 	return new Promise(resolve => {
-		// 		let _url = this.state.apiHost + '/api/v1/feedback/feed/'
-		// 		let request = new XMLHttpRequest();
-		// 		request.open("POST", _url)
-		// 		request.open("POST", _url);
-		// 		request.setRequestHeader('Accept', 'application/json, text/plain, application/zip, */*');
-		// 		request.setRequestHeader('Accept-Language', 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7');
-		// 		request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-		// 		request.setRequestHeader('Authorization', 'Bearer ' + this.getCookie('authHeader'));
-		// 		request.send(JSON.stringify(data));
-		// 		let self = this;
-		// 		request.onload = function () {
-		// 			if (request.status === 200 || request.status === 201) {
-		// 				resolve()
-		// 				// self.successModal();
-		// 				// document.querySelector('.hideTriggerFeedback').click();
-		// 			}
-		// 		}
-		// 	})
-		// }
-
 	}, {
 		key: 'registration',
 		value: function registration(fields) {
 			_Rrd2.default.registration(fields);
-			// let $formdata = new FormData();
-			// $formdata = {
-			// 	username: fields[0].value,
-			// 	email: fields[0].value,
-			// 	password1: fields[1].value,
-			// 	password2: fields[2].value,
-			// 	first_name: 'default',
-			// 	last_name: 'default',
-			// 	is_boss: false
-			// }
-			// let _url = this.state.apiHost + "/rest-auth/registration/";
-			// let request = new XMLHttpRequest();
-			// request.open("POST", _url);
-			// request.setRequestHeader('Accept', 'application/json, text/plain, application/zip, */*');
-			// request.setRequestHeader('Accept-Language', 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7');
-			// request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-			// request.send(JSON.stringify($formdata));
-			// let self = this;
-			// request.onload = function () {
-			// 	if (request.status === 201) {
-			// 		alert('Не забудьте подтвердить свою почту');
-			// 		let _link = self.state.origin + '/login';
-			// 		document.location.href = _link;
-			// 	} else {
-			// 		// alert('Не удлось зарегистрировать пользователя')
-			// 		let err = JSON.parse(request.responseText)
-			// 		console.log(err)
-			// 		let _errMessage = err.email[0] || err.password1[0] || err.username[0] || 'Не удалось зарегестрировать пользователя'
-			// 		Validator.setInvalid(fields[3], _errMessage)
-			// 	}
-			// }
-			// request.onerror = function (err) {
-			// 	// alert('Не удалось зарегистрировать пользователя')
-			// 	console.log(err)
-			// 	let _errMessage = err.email[0] || err.password1[0] || err.username[0] || 'Не удалось зарегестрировать пользователя'
-			// 	Validator.setInvalid(fields[3], _errMessage)
-			// }
 		}
 	}, {
 		key: 'login',
 		value: function login(fields) {
-			var $formdata = new FormData();
-			$formdata = {
-				email: fields[0].value,
-				password: fields[1].value
-			};
-			var _url = this.state.apiHost + "/rest-auth/login/";
-			var request = new XMLHttpRequest();
-			request.open("POST", _url);
-			request.setRequestHeader('Accept', 'application/json, text/plain, application/zip, */*');
-			request.setRequestHeader('Accept-Language', 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7');
-			request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-			request.send(JSON.stringify($formdata));
-			var self = this;
-			request.onload = function () {
-				if (request.status === 200) {
-					document.cookie = 'email="from@landing.com"; path=/; max-age=360'; // замена emai (может отстаться от демо-юзера и глядя на email основной клиент ставит флаг demoMode на true)
-					document.cookie = 'rrdtkn=""; path=/; max-age=-1'; // на всякий случай удаление токена
-					var _rrdtkn = 'rrdtkn=' + JSON.parse(request.responseText).token + ';path=/' + ';max-age=360'; // новый токен
-					document.cookie = _rrdtkn; // установка токена
-					var _link = self.state.origin;
-					document.location.href = _link; // переход на основной клиент
-				} else if (request.status === 400) {
-					// alert('Не правильные логин или пароль')
-					_Validators.Validator.setInvalid(fields[1], 'Не верные логин или пароль');
-				}
-			};
-			request.onerror = function (err) {
-				console.log(err);
-				alert('Не удалось войти');
-			};
+			_Rrd2.default.login(field);
 		}
 	}, {
 		key: 'successModal',
@@ -2084,52 +1958,6 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * Home page scripts.
- *
- * @module Home
- */
-var Home = function () {
-	/**
-  * Cache data, make preparations and initialize page scripts.
-  */
-	function Home() {
-		_classCallCheck(this, Home);
-
-		// initialize after construction
-		this.init();
-	}
-
-	/**
-  * Initialize Home page scripts.
-  */
-
-
-	_createClass(Home, [{
-		key: "init",
-		value: function init() {}
-	}]);
-
-	return Home;
-}();
-
-exports.default = Home;
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
  * Website's common scripts (example).
  *
  * @module Rrd
@@ -2144,10 +1972,12 @@ var Rrd = exports.Rrd = function () {
 			authorized: false,
 
 			// urls
-			apiHost: 'http://api.rrdoc.itt', // host dev
-			origin: 'http://rrdoc.itt',
+			// apiHost: 'http://api.rrdoc.itt',	// host dev
+			// origin: 'http://rrdoc.itt',
 			// apiHost: 'https://api.rrdoc.ru',	// host prod
 			// origin: 'https://rrdoc.ru',
+			apiHost: 'http://10.0.18.242:81', // host prod
+			origin: 'http://10.0.18.242:80',
 			validToken: '/rest-auth/api-token-verify/'
 		};
 
@@ -2314,6 +2144,40 @@ var Rrd = exports.Rrd = function () {
 			};
 		}
 	}, {
+		key: 'login',
+		value: function login(fields) {
+			var $formdata = new FormData();
+			$formdata = {
+				email: fields[0].value,
+				password: fields[1].value
+			};
+			var _url = this.state.apiHost + "/rest-auth/login/";
+			var request = new XMLHttpRequest();
+			request.open("POST", _url);
+			request.setRequestHeader('Accept', 'application/json, text/plain, application/zip, */*');
+			request.setRequestHeader('Accept-Language', 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7');
+			request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+			request.send(JSON.stringify($formdata));
+			var self = this;
+			request.onload = function () {
+				if (request.status === 200) {
+					document.cookie = 'email="from@landing.com"; path=/; max-age=360'; // замена emai (может отстаться от демо-юзера и глядя на email основной клиент ставит флаг demoMode на true)
+					document.cookie = 'rrdtkn=""; path=/; max-age=-1'; // на всякий случай удаление токена
+					var _rrdtkn = 'rrdtkn=' + JSON.parse(request.responseText).token + ';path=/' + ';max-age=360'; // новый токен
+					document.cookie = _rrdtkn; // установка токена
+					var _link = self.state.origin;
+					document.location.href = _link; // переход на основной клиент
+				} else if (request.status === 400) {
+					// alert('Не правильные логин или пароль')
+					Validator.setInvalid(fields[1], 'Не верные логин или пароль');
+				}
+			};
+			request.onerror = function (err) {
+				console.log(err);
+				alert('Не удалось войти');
+			};
+		}
+	}, {
 		key: 'sendReqest',
 		value: function sendReqest(method, url, data) {
 			var request = new XMLHttpRequest();
@@ -2351,6 +2215,52 @@ var Rrd = exports.Rrd = function () {
 
 
 exports.default = new Rrd();
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Home page scripts.
+ *
+ * @module Home
+ */
+var Home = function () {
+	/**
+  * Cache data, make preparations and initialize page scripts.
+  */
+	function Home() {
+		_classCallCheck(this, Home);
+
+		// initialize after construction
+		this.init();
+	}
+
+	/**
+  * Initialize Home page scripts.
+  */
+
+
+	_createClass(Home, [{
+		key: "init",
+		value: function init() {}
+	}]);
+
+	return Home;
+}();
+
+exports.default = Home;
 
 /***/ })
 /******/ ]);

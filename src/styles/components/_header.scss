@@ -90,6 +90,16 @@
 		}
 	}
 
+	// &-api {
+	// 	border-left: 1px solid rgba(255, 255, 255, 0.6);
+	// 	width: 1px;
+	// 	// padding-left: 30px;
+	// 	@include tabletMedium {
+	// 		border: none;
+	// 		padding: 0;
+	// 	}
+	// }
+
 	&-nav {
 		display: flex;
 		justify-content: flex-end;
@@ -209,9 +219,19 @@
 			transition-delay: 0.5s;
 		}
 
-		span {
+		span {	// я добавил
 			display: inline-block;
 			vertical-align: middle;
+
+			a {
+				color: white;
+			}
+			a:active {
+				color: white;
+			}
+			a:visited {
+				color: white;
+			}
 		}
 	}
 
