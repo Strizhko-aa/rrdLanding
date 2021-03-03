@@ -46,7 +46,7 @@
 		"gulp-util": "^3.0.7",
 		"imports-loader": "^0.7.1",
 		"jscs": "^3.0.7",
-		"pug": "^2.0.0-beta6",
+		"pug": "^3.0.1",
 		"pug-include-glob": "^0.3.3",
 		"require-dir": "^0.3.1",
 		"run-sequence": "^1.2.2",
